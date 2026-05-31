@@ -33,10 +33,11 @@ function App() {
           <Route path='/about' element={ <About />}/>
           <Route path='/contact' element={ <Contact />}/>
           <Route path='/cart' element={ <Cart />}/>
-        
+          {/* Stripe redirects here with a full page load; keep outside nested guards that assume in-app navigation */}
+          <Route path='/order-confirm' element={ <PaymentConfirmation />}/>
+
           <Route path='/' element={<PrivateRoute />}>
             <Route path='/checkout' element={ <Checkout />}/>
-            <Route path='/order-confirm' element={ <PaymentConfirmation />}/>
             <Route path='/profile/orders' element={ <MyOrders />}/>
           </Route>
 

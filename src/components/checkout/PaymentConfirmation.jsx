@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
+import { Skeleton } from '@mui/material';
 import { FaCheckCircle } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { stripePaymentConfirmation } from '../../store/actions';
+import { getAuthToken } from '../../api/authToken';
 import toast from 'react-hot-toast';
 
 const PaymentConfirmation = () => {
@@ -13,6 +15,7 @@ const PaymentConfirmation = () => {
     const  [errorMessage, setErrorMessage ] = useState("");
     const { cart } = useSelector((state) => state.carts);
     const [ loading, setLoading] = useState(false);
+    const isLoggedIn = Boolean(getAuthToken());
 
     const paymentIntent = searchParams.get("payment_intent");
     const clientSecret = searchParams.get("payment_intent_client_secret");
@@ -40,6 +43,20 @@ const PaymentConfirmation = () => {
             dispatch(stripePaymentConfirmation(sendData, setErrorMessage, setLoading, toast, navigate));
         }
     }, [paymentIntent, clientSecret, redirectStatus, cart]);
+
+  if (!isLoggedIn) {
+    return (
+      <div className='min-h-screen flex items-center justify-center px-4'>
+        <div className="p-8 rounded-lg shadow-lg text-center max-w-md border border-gray-200">
+          <h2 className='text-xl font-bold text-gray-800 mb-2'>Session expired</h2>
+          <p className="text-gray-600 mb-4">
+            Please log in again. If payment succeeded, check My Orders or contact support with your payment id.
+          </p>
+          <Link to="/login" className="text-blue-600 font-semibold underline">Log in</Link>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className='min-h-screen flex items-center justify-center'>
