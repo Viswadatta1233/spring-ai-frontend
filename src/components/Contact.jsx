@@ -54,7 +54,7 @@ const Contact = () => {
                     <div className="flex flex-col items-center space-y-2 mt-4">
                         <div className="flex items-center">
                             <FaPhone className="text-blue-500 mr-2"/>
-                            <span className="text-gray-600">+4 8961 944 149</span>
+                            <span className="text-gray-600">9182039121</span>
                         </div>
 
                         <div className="flex items-center">
@@ -64,7 +64,7 @@ const Contact = () => {
 
                         <div className="flex items-center">
                             <FaMapMarkedAlt className="text-blue-500 mr-2"/>
-                            <span className="text-gray-600">123 Main, Town, USA</span>
+                            <span className="text-gray-600">dattanidumukkala.98@gmail.com</span>
                         </div>
                     </div>
                 </div>
